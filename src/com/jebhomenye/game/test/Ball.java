@@ -27,5 +27,15 @@ public class Ball {
 	public void draw(Graphics2D g){
 		g.fillOval(Math.round(x), Math.round(y), diameter(), diameter());
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Ball{" +
+				"dx=" + dx +
+				", dy=" + dy +
+				", x=" + x +
+				", y=" + y +
+				", radius=" + radius +
+				'}';
+	}
 }

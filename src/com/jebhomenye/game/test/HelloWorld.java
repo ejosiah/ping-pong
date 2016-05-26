@@ -5,10 +5,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import com.jebhomenye.core.GameCore;
+import com.jebhomenye.core.Scene;
 
 public class HelloWorld extends GameCore implements KeyListener {
 
-	
+
+	public HelloWorld(Scene startingScene) {
+		super(startingScene);
+	}
+
 	@Override
 	protected void init(){
 		super.init();
@@ -46,7 +51,7 @@ public class HelloWorld extends GameCore implements KeyListener {
 	}
 	
 	public static void main(String...args){
-		new HelloWorld().run();
+		new HelloWorld(null).run();
 	}
 	
 }

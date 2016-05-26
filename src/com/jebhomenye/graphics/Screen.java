@@ -34,16 +34,12 @@ public class Screen {
 	}
 	
 	private boolean matches(DisplayMode displayMode1, DisplayMode displayMode2) {
-		if(displayMode1 == null || displayMode2 == null){
-			return false;
-		}
-		if(displayMode1.getWidth() == displayMode2.getWidth()
+		return
+			(displayMode1 == null || displayMode2 == null)
+		 ||
+			(displayMode1.getWidth() == displayMode2.getWidth()
 			&& displayMode1.getHeight() == displayMode2.getHeight()
-			&& displayMode1.getBitDepth() == displayMode1.getBitDepth()
-			){
-			return true;
-		}
-		return false;
+			&& displayMode1.getBitDepth() == displayMode1.getBitDepth());
 	}
 
 	public void fullScreenWindow(DisplayMode mode){
@@ -148,6 +144,13 @@ public class Screen {
 		Window window = device.getFullScreenWindow();
 		if(window != null){
 			window.addKeyListener(listener);
+		}
+	}
+
+	public void removeKeyListener(KeyListener listener){
+		Window window = device.getFullScreenWindow();
+		if(window != null){
+			window.removeKeyListener(listener);
 		}
 	}
 
