@@ -20,7 +20,6 @@ public class HelloWorld extends GameCore implements KeyListener {
 		screen.addKeyListener(this);
 	}
 	
-	@Override
 	protected void draw(Graphics2D g) {
 		g.setColor(screen.background());
 		g.fillRect(0, 0, screen.width(), screen.height());

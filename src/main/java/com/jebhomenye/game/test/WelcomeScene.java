@@ -44,6 +44,11 @@ public class WelcomeScene extends Scene {
 	}
 
 	@Override
+	protected void checkGameInput() {
+
+	}
+
+	@Override
 	public void keyTyped(KeyEvent e) {
 
 	}

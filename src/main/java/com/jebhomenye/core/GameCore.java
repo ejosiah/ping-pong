@@ -58,10 +58,8 @@ public abstract class GameCore {
 			}
 			long elapsedTime = System.currentTimeMillis() - currentTime;
 			currentTime += elapsedTime;
-			update(elapsedTime);
-			
 			Graphics2D g = screen.graphics();
-			draw(g);
+			scene.run(elapsedTime, g);
 			g.dispose();
 			
 			screen.update();
@@ -69,8 +67,8 @@ public abstract class GameCore {
 	}
 
 	protected void nextScene(Scene scene){
-		Scene oldScene = this.scene;
 		updatingScene.getAndSet(true);
+		Scene oldScene = this.scene;
 		screen.addKeyListener(scene);
 		set(scene);
 		scene.init();
@@ -82,13 +80,5 @@ public abstract class GameCore {
 	public void stop(){
 		isRunning.set(false);
 	}
-	
-	
-	protected  void update(long elapsedTime){
-		scene.update(elapsedTime);
-	}
-	
-	protected void draw(Graphics2D g){
-		scene.draw(g);
-	}
+
 }
