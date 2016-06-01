@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by jay on 28/05/2016.
  */
-public abstract class AbstractPlayer implements Player {
+public abstract class  AbstractPlayer implements Player {
 	protected Ball ball;
 	protected Board board;
 	protected Scene scene;

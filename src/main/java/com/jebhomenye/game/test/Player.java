@@ -34,4 +34,6 @@ public interface Player extends GameObject{
 	boolean facingLeft();
 
 	int handleCollision(Ball ball);
+
+	void createBounds();
 }

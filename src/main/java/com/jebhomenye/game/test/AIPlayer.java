@@ -71,10 +71,10 @@ public class AIPlayer extends AbstractPlayer {
 
 		if (board.pos.y() <= 0) {	// scene boundary
 			board.pos.y(0f);
-			board.updateBounds();
+		//	board.updateBounds();
 		} else if (board.pos.y() + board.height >= scene.height()) {
 			board.pos.y((float) (scene.height() - board.height));
-			board.updateBounds();
+		//	board.updateBounds();
 		}
 		board.update(elapsedTime);
 		if((facingRight() && ball.pos().x() > pos().x() + 100)

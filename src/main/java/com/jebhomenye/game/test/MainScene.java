@@ -18,7 +18,7 @@ public class MainScene extends Scene {
 	private java.util.List<Player> players = new ArrayList<>();
 	private int hits;
 	private Vector2D v = new Vector2D(0.05f);
-	private Vector2D maxV = new Vector2D(0.4f);
+	private Vector2D maxV = new Vector2D(0.5f);
 	private Vector2D ballDirection = new Vector2D();
 	private Vector2D temp = new Vector2D();
 
@@ -36,7 +36,7 @@ public class MainScene extends Scene {
 		player2.setBall(ball);
 		player2.init();
 		player2.pos().set(width() - 20, height()/2);
-		((AIPlayer)player2).createBounds();
+		player2.createBounds();
 		players.add(player1);
 		players.add(player2);
 	}
@@ -85,7 +85,7 @@ public class MainScene extends Scene {
 			temp = Vector2D.abs(temp.copy(ball.velocity())).compAdd(v).compMultiply(ballDirection);
 
 			ball.velocity().set(temp.x(), temp.y());
-			System.out.println("ball velocity: " + ball.velocity());
+		//	System.out.println("ball velocity: " + ball.velocity());
 			hits = 0;
 		}
 	}
