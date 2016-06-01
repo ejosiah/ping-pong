@@ -15,11 +15,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Created by jay on 27/05/2016.
  */
 public class HumanPlayer extends AbstractPlayer implements KeyListenerAdapter {
+
 	private AtomicBoolean up;
 	private AtomicBoolean down;
+	private Position facing;
 
-	public HumanPlayer(Scene scene) {
-		super(scene);
+	public HumanPlayer(Position facing, Scene scene) {
+		super(facing, scene);
+		this.facing = facing;
 	}
 
 

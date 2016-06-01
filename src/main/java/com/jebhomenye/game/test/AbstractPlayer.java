@@ -15,10 +15,12 @@ public abstract class  AbstractPlayer implements Player {
 	protected Ball ball;
 	protected Board board;
 	protected Scene scene;
-	protected boolean deubg;
+	protected boolean debug = true;
+	protected Position direction;
 
 
-	public AbstractPlayer(Scene scene){
+	public AbstractPlayer(Position direction, Scene scene){
+		this.direction = direction;
 		this.scene = scene;
 	}
 
@@ -44,7 +46,11 @@ public abstract class  AbstractPlayer implements Player {
 
 	@Override
 	public void init() {
-		board = new Board(20, scene.height()/2, 10, 70);
+		if(facingRight()) {
+			board = new Board(20, scene.height() / 2, 10, 70);
+		}else{
+			board = new Board(scene.width() - 20, scene.height()/2, 10, 70);
+		}
 		createBounds();
 	}
 
@@ -54,7 +60,7 @@ public abstract class  AbstractPlayer implements Player {
 
 	@Override
 	public boolean facingRight(){
-		return pos().x() < scene.width()/2;
+		return direction == Position.LEFT;
 	}
 
 	@Override
@@ -85,7 +91,7 @@ public abstract class  AbstractPlayer implements Player {
 	public void draw(Graphics2D g) {
 		board.draw(g);
 		Color oldColor = g.getColor();
-		if(deubg) {
+		if(debug) {
 			bounds().forEach(b -> {
 				int x = Math.round(b.origin.x() - b.r);
 				int y = Math.round(b.origin.y() - b.r);

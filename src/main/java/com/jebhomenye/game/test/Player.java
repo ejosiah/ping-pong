@@ -9,6 +9,8 @@ import java.awt.*;
  */
 public interface Player extends GameObject{
 
+	enum Position{ LEFT, RIGHT}
+
 	java.util.List<Circle> bounds();
 
 	default void setBall(Ball ball){

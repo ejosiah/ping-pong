@@ -29,8 +29,8 @@ public class AIPlayer extends AbstractPlayer {
 	private Vector2D a = new Vector2D(0, 0.002f);
 
 
-	public AIPlayer(Scene scene){
-		super(scene);
+	public AIPlayer(Position direction, Scene scene){
+		super(direction, scene);
 	}
 
 	@Override

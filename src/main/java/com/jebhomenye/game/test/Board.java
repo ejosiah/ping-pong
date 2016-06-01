@@ -48,8 +48,8 @@ public class Board implements GameObject {
 	public void update(long elapsedTime){
 		temp.copy(velocity).multiplyBy(elapsedTime);
 		pos.compAdd(temp);
-		updateBounds();
 		bounds.forEach(b -> b.origin.compAdd(temp));
+		updateBounds();
 	}
 
 	public void draw(Graphics2D g){

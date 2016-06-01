@@ -12,33 +12,31 @@ import java.util.ArrayList;
  * Created by jay on 26/05/2016.
  */
 public class MainScene extends Scene {
-	private Ball ball;
-	private Player player1;
-	private Player player2;
-	private java.util.List<Player> players = new ArrayList<>();
-	private int hits;
-	private Vector2D v = new Vector2D(0.05f);
-	private Vector2D maxV = new Vector2D(0.5f);
-	private Vector2D ballDirection = new Vector2D();
-	private Vector2D temp = new Vector2D();
+	protected Ball ball;
+	protected Player player1;
+	protected Player player2;
+	protected java.util.List<Player> players = new ArrayList<>();
+	protected int hits;
+	protected Vector2D v = new Vector2D(0.05f);
+	protected Vector2D maxV = new Vector2D(0.5f);
+	protected Vector2D ballDirection = new Vector2D();
+	protected Vector2D temp = new Vector2D();
 
 
 	@Override
 	public void init(){
 		System.out.println("Intializing main scene");
 		ball = new Ball(screen().width()/2, screen().height()/2, 10, this);
-		player1 = new AIPlayer(this);
-		player2 = new AIPlayer(this);
+		player1 = new AIPlayer(Player.Position.LEFT, this);
+		player2 = new AIPlayer(Player.Position.RIGHT, this);
 	//	player1 = new HumanPlayer(this);
-		player1.setBall(ball);
-		player1.init();
-
-		player2.setBall(ball);
-		player2.init();
-		player2.pos().set(width() - 20, height()/2);
-		player2.createBounds();
 		players.add(player1);
 		players.add(player2);
+
+		players.forEach( player -> {
+			player.setBall(ball);
+			player.init();
+		});
 	}
 
 	@Override
@@ -63,6 +61,13 @@ public class MainScene extends Scene {
 
 	@Override
 	public void update(long elapsedTime){
+		updateBall(elapsedTime);
+		updatePlayers(elapsedTime);
+		players.forEach( player -> handleCollision(ball, player));
+		adjustBallSpeed();
+	}
+
+	protected void updateBall(long elapsedTime){
 		if(ball.hitLeftBoundary()){
 			ball.velocity().x(abs(ball.velocity().x()));
 		}else if(ball.hitRightBoundary()){
@@ -75,17 +80,22 @@ public class MainScene extends Scene {
 		}
 
 		ball.update(elapsedTime);
+	}
 
+	protected void updatePlayers(long elapsedTime){
 		players.forEach(player -> {
 			player.update(elapsedTime);
-			handleCollision(ball, player);
+
 		});
+	}
+
+	protected void adjustBallSpeed(){
 		if(hits > 0 && hits%2 == 0){
 			ballDirection = Vector2D.direction(ballDirection.copy(ball.velocity()));
 			temp = Vector2D.abs(temp.copy(ball.velocity())).compAdd(v).compMultiply(ballDirection);
 
 			ball.velocity().set(temp.x(), temp.y());
-		//	System.out.println("ball velocity: " + ball.velocity());
+			//	System.out.println("ball velocity: " + ball.velocity());
 			hits = 0;
 		}
 	}
