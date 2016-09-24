@@ -2,8 +2,6 @@ package com.jebhomenye.game.test.multiplayer;
 
 import com.jebhomenye.game.test.*;
 
-import java.util.concurrent.BlockingQueue;
-
 import static java.lang.Math.abs;
 
 /**

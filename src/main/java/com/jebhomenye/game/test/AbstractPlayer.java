@@ -15,7 +15,7 @@ public abstract class  AbstractPlayer implements Player {
 	protected Ball ball;
 	protected Board board;
 	protected Scene scene;
-	protected boolean debug = true;
+	protected boolean debug = false;
 	protected Position direction;
 
 

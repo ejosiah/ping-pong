@@ -1,9 +1,6 @@
 package com.jebhomenye.math;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by jay on 27/05/2016.
@@ -11,6 +8,14 @@ import java.util.Random;
 public class Weighted<T> {
 	private List<T> list = new ArrayList<>();
 	private static Random rng = new Random();
+
+	public Weighted(){
+
+	}
+
+	public Weighted(Map<T, Integer> items){
+		items.forEach(this::add);
+	}
 
 	public Weighted<T> add(T item, int weight){
 		list.addAll(Collections.nCopies(weight, item));

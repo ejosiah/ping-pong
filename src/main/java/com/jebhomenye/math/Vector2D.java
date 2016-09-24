@@ -132,7 +132,7 @@ public class Vector2D implements Comparable<Vector2D>{
 	}
 
 	public static Vector2D direction(Vector2D v){
-		return v.compDivide(abs(new Vector2D(v)));
+		return v.compDivide(abs(temp.copy(v)));
 	}
 
 	public static Vector2D abs(Vector2D v){

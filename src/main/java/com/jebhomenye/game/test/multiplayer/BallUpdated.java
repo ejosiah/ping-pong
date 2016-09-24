@@ -1,49 +1,46 @@
 package com.jebhomenye.game.test.multiplayer;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+
+import java.nio.ByteBuffer;
+
 /**
  * Created by Josiah on 6/1/2016.
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BallUpdated implements GameEvent {
+
+	public static final int SIZE = 16;
+
     private float x, y, dx, dy;
 
-    public BallUpdated(){}
+	@Override
+	public byte[] toBytes() {
+		byte[] header = GameEvent.super.toBytes();
+		int offset = header.length;
+		ByteBuffer buff = ByteBuffer.allocate(offset + SIZE_OF_INT + SIZE);
+		buff.put(header);
+		buff.putInt(SIZE);
+		buff.putFloat(x);
+		buff.putFloat(y);
+		buff.putFloat(dx);
+		buff.putFloat(dy);
 
-    public BallUpdated(float x, float y, float dx, float dy) {
-        this.x = x;
-        this.y = y;
-        this.dx = dx;
-        this.dy = dy;
-    }
+		return buff.array();
+	}
 
-    public float getX() {
-        return x;
-    }
-
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    public float getDx() {
-        return dx;
-    }
-
-    public void setDx(float dx) {
-        this.dx = dx;
-    }
-
-    public float getDy() {
-        return dy;
-    }
-
-    public void setDy(float dy) {
-        this.dy = dy;
-    }
+	@Override
+	public BallUpdated fromBytes(byte[] bytes) {
+		ByteBuffer in = ByteBuffer.wrap(bytes);
+		x = in.getFloat();
+		y = in.getFloat();
+		dx = in.getFloat();
+		dy = in.getFloat();
+		return this;
+	}
 }

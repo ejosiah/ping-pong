@@ -1,5 +1,6 @@
-package com.jebhomenye.game.test;
+package com.jebhomenye.game.test.multiplayer;
 
+import com.jebhomenye.game.test.Player;
 import com.jebhomenye.game.test.multiplayer.GameEvent;
 
 /**
@@ -32,4 +33,14 @@ public class InitEvent implements GameEvent {
     public void setPosition(Player.Position position) {
         this.position = position;
     }
+
+	@Override
+	public byte[] toBytes() {
+		return new byte[0];
+	}
+
+	@Override
+	public InitEvent fromBytes(byte[] bytes) {
+		return this;
+	}
 }
